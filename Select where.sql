@@ -5,6 +5,7 @@ SELECT * from Customers WHERE Country = 'USA'
 SELECT * from Customers WHERE Country = 'Italy'
 SELECT * from Customers WHERE Country = 'USA' OR Country = 'Italy'
 SELECT * from Customers WHERE Country = 'USA' OR Country = 'Italy' ORDER BY Country
+SELECT * from Customers WHERE Country != 'USA' AND Country <> 'Mexico'
 
 
 SELECT * from Employees
