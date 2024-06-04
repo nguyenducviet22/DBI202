@@ -17,3 +17,7 @@ SELECT COUNT(*) from (SELECT DISTINCT City from Employees) AS [No Cities]
 SELECT COUNT(DISTINCT City) from Employees
 
 SELECT City, COUNT(City) AS [No employees] from Employees GROUP BY City
+
+SELECT City, COUNT(City) AS [No employees] from Employees GROUP BY City HAVING COUNT(City) >= 2
+
+SELECT City, COUNT(City) from Employees WHERE City IN('London', 'Seattle') GROUP BY City
