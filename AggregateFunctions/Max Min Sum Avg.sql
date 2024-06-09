@@ -16,3 +16,10 @@ SELECT SUM(Freight) AS [Sum of Freight] from Orders WHERE ShipVia = 3
 SELECT AVG(Freight) from Orders
 SELECT * from Orders WHERE Freight >= (SELECT AVG(Freight) from Orders) ORDER BY Freight ASC
 SELECT COUNT(*) from Orders WHERE Freight >= (SELECT AVG(Freight) from Orders)
+
+SELECT Region, COUNT(*) from Employees GROUP BY Region
+SELECT Region, COUNT(Region) from Employees GROUP BY Region
+
+SELECT * from Orders
+SELECT ShipCountry, COUNT(*) AS [No Orders] from Orders GROUP BY ShipCountry
+SELECT ShipCountry, COUNT(*) AS [No Orders] from Orders GROUP BY ShipCountry HAVING COUNT(*) >= 50
