@@ -51,3 +51,25 @@ INSERT INTO Student(StudentID, LastName, FirstName, MajorID) VALUES('UNK', N'Äá
 SELECT s.*, m.MajorName, m.Hotline FROM Student s RIGHT JOIN Major m 
 									ON s.MajorID = m.MajorID 
 									WHERE s.MajorID IN ('SE', 'IA')
+
+SELECT * FROM Major
+SELECT * FROM Student
+
+SELECT MajorID, COUNT(MajorID) AS [No students] FROM Student GROUP BY MajorID HAVING COUNT(MajorID) >= 3
+SELECT MajorID, COUNT(MajorID) AS [No students] FROM Student GROUP BY MajorID 
+	HAVING COUNT(MajorID) <= ALL(SELECT COUNT(MajorID) FROM Student GROUP BY MajorID)
+
+SELECT COUNT(*) AS [No SE student] FROM Student WHERE MajorID = 'SE'
+SELECT MajorID, COUNT(*) AS [No SE student] FROM Student WHERE MajorID = 'SE' GROUP BY MajorID
+SELECT MajorID, COUNT(*) AS [No SE student] FROM Student GROUP BY MajorID HAVING MajorID = 'SE'
+
+SELECT m.MajorID, m.MajorName, COUNT(*) AS [No students] FROM Student s INNER JOIN Major m 
+	ON s.MajorID = m.MajorID GROUP BY m.MajorID, m.MajorName
+
+SELECT s.StudentID ,m.MajorID, m.MajorName FROM Student s RIGHT JOIN Major m ON s.MajorID = m.MajorID
+SELECT m.MajorID, m.MajorName, COUNT(m.MajorID) AS [No students] FROM Student s RIGHT JOIN Major m 
+	ON s.MajorID = m.MajorID GROUP BY m.MajorID, m.MajorName --KR = 1
+SELECT m.MajorID, m.MajorName, COUNT(s.MajorID) AS [No students] FROM Student s RIGHT JOIN Major m 
+	ON s.MajorID = m.MajorID GROUP BY m.MajorID, m.MajorName --KR = 0
+SELECT m.MajorID, m.MajorName, COUNT(StudentID) AS [No students] FROM Student s RIGHT JOIN Major m 
+	ON s.MajorID = m.MajorID GROUP BY m.MajorID, m.MajorName --KR = 0
