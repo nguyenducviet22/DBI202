@@ -64,5 +64,22 @@ INSERT INTO Registration(StudentID, ClubID) VALUES('SE2', 'CSG')
 
 INSERT INTO Registration(StudentID, ClubID) VALUES('SE3', 'SiTi')
 
+SELECT * FROM Club
+SELECT * FROM Student
 SELECT * FROM Registration
+
+SELECT s.StudentID, s.FirstName + ' ' + s.LastName AS Fullname, r.ClubID FROM Student s LEFT JOIN Registration r 
+	ON s.StudentID = r.StudentID
+
+SELECT s.StudentID, s.FirstName + ' ' + s.LastName AS Fullname, c.ClubID, c.ClubName, r.JoinedDate
+		FROM Student s, Registration r, Club c 
+		WHERE s.StudentID = r.StudentID AND r.ClubID = c.ClubID --just show all commons - 7 rows
+--<=>
+SELECT s.StudentID, s.FirstName + ' ' + s.LastName AS Fullname, c.ClubID, c.ClubName, r.JoinedDate
+		FROM Student s JOIN Registration r ON s.StudentID = r.StudentID
+						JOIN Club c ON r.ClubID = c.ClubID --just show all commons - 7 rows
+
+SELECT s.StudentID, s.FirstName + ' ' + s.LastName AS Fullname, c.ClubID, c.ClubName, r.JoinedDate
+		FROM Student s FULL JOIN Registration r ON s.StudentID = r.StudentID
+						FULL JOIN Club c ON r.ClubID = c.ClubID -- show all rows (inc. null value) - 11 rows
 
