@@ -23,9 +23,12 @@ CREATE TABLE StudentV1
 )
 
 INSERT INTO StudentV1 VALUES ('SE1', N'Nguyễn', N'An', NULL, NULL, 'SE')
+INSERT INTO StudentV1 VALUES ('SE2', N'Tran', N'Binh', 2004, NULL, 'GD')
+
 SELECT * FROM StudentV1
 SELECT * FROM MajorV1
 
+DROP TABLE MajorV2
 CREATE TABLE MajorV2
 (
 	MajorID char(2) PRIMARY KEY,
@@ -46,4 +49,8 @@ CREATE TABLE StudentV2
 --	MajorID char(2) REFERENCES MajorV2(MajorID)
 )
 
-INSERT INTO StudentV1 VALUES ('SE1', N'Nguyễn', N'An', NULL, NULL, 'SE')
+INSERT INTO StudentV2 VALUES ('SE1', N'Nguyễn', N'An', NULL, NULL, 'SE')
+INSERT INTO StudentV2 VALUES ('SE2', N'Tran', N'Binh', NULL, 'TP HCM', 'IS')
+
+SELECT * FROM StudentV2
+SELECT * FROM MajorV2
