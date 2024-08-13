@@ -1,3 +1,7 @@
+DROP TABLE PersonV2_0
+DROP TABLE VaccinationV2_0
+DROP TABLE VaccineV2_0
+
 CREATE TABLE PersonV2_0(
 	ID char(11) PRIMARY KEY,
 	LastName nvarchar(30),
@@ -5,7 +9,6 @@ CREATE TABLE PersonV2_0(
 	Phone varchar(11) NOT NULL UNIQUE
 )
 
-DROP TABLE VaccinationV2_0
 CREATE TABLE VaccinationV2_0(--Normalize a col by using dropdown, do not freely type
 	STT int IDENTITY PRIMARY KEY,
 	Dose int,
@@ -35,7 +38,14 @@ INSERT INTO VaccinationV2_0 VALUES(1, GETDATE(), 'AstraZeneca', NULL, NULL, '000
 INSERT INTO VaccinationV2_0 VALUES(2, GETDATE(), 'AstraZeneca', NULL, NULL, '00000000001')
 INSERT INTO VaccinationV2_0 VALUES(1, GETDATE(), 'AZ', NULL, NULL, '00000000002')--Failed, STT was still automatically increased
 INSERT INTO VaccinationV2_0 VALUES(1, GETDATE(), 'AstraZeneca', NULL, NULL, '00000000003')
+INSERT INTO VaccinationV2_0 VALUES(3, GETDATE(), 'Pfizer', NULL, NULL, '00000000001')
+INSERT INTO VaccinationV2_0 VALUES(4, GETDATE(), 'Verocell', NULL, NULL, '00000000001')
+INSERT INTO VaccinationV2_0 VALUES(1, GETDATE(), 'Verocell', NULL, NULL, '00000000002')
+INSERT INTO VaccinationV2_0 VALUES(2, GETDATE(), 'AstraZeneca', NULL, NULL, '00000000003')
 
-SELECT * FROM VaccineV2_0
 SELECT * FROM PersonV2_0
+SELECT * FROM VaccineV2_0
 SELECT * FROM VaccinationV2_0
+
+SELECT vc.VaccineName, COUNT(vcn.STT) FROM VaccineV2_0 vc LEFT JOIN VaccinationV2_0 vcn 
+			ON vc.VaccineName = vcn.Vaccine GROUP BY vc.VaccineName
