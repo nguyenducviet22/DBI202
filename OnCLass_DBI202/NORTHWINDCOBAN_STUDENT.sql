@@ -69,30 +69,53 @@ ORDER BY FirstName DESC, LastName DESC
 --HAVING
 
 --vidu1: Hien thi bang OrderDetail sap xep theo UnitPrice giam dan
-
-
+SELECT * FROM [Order Details]
+ORDER BY UnitPrice DESC
 
 --vidu2: Hien thi bang OrderDetail sap xep theo UnitPrice giam dan,
 --neu cung UnitPrice thi Quantity tang dan
-
+SELECT * FROM [Order Details]
+ORDER BY UnitPrice DESC, Quantity ASC
 
 --vidu3: Hien thi 2 bo co UnitPrice cao nhat
-
+SELECT TOP 2* FROM [Order Details]
+ORDER BY UnitPrice
 
 --vidu4:  Dem so don hang cua tung khach hang
 --COUNT,MIN,MAX, AVG, SUM
+SELECT COUNT(*) FROM Customers
 
+SELECT CustomerID, COUNT(OrderID) AS [No Orders] FROM Orders
+GROUP BY CustomerID
+
+SELECT CustomerID, OrderDate, COUNT(OrderID) AS [No Orders] FROM Orders
+--WHERE CustomerID = 'VINET'
+GROUP BY CustomerID, OrderDate
 
 --vidu5: Dem so don hang cua tung khach hang, chi thong ke khach hang co tu 4 don hang tro len
+--HAVING set cond for Count, Sum, ...
+SELECT CustomerID, COUNT(OrderID) AS [No Orders] FROM Orders
+GROUP BY CustomerID
+HAVING COUNT(OrderID) >= 4
 
+--vidu6: Lay OrderID, ProductID, Quantity trong bang Order Details co Unitprice giua 50 va 100 va quantity la 20
+SELECT OrderID, ProductID, Quantity
+FROM [Order Details]
+WHERE UnitPrice BETWEEN 50 AND 100 AND Quantity = 20
 
---vidu6: Lay OrderID, ProductID, Quantity  trong bang Order Details co Unitprice giua 50 vaf 100 va quantity la 20
+--vidu7: Lay gia trung binh cua tat ca cac mat hang (Unitprice trong bang Order Details)
+SELECT AVG(UnitPrice) AS avgPrice
+FROM [Order Details]
 
-
---vidu7": Lay gia trung binh cua tat ca cac mat hang (Unitprice trong bang Order Details)
+SELECT ProductID, AVG(UnitPrice) AS avgPrice
+FROM [Order Details]
+GROUP BY ProductID
+ORDER BY ProductID
 
 --vidu8: Lay thong tin OrderID, CustomerID, Orderdate trong thang 7 nam 1996 
-
+SELECT OrderID, CustomerID, OrderDate
+FROM Orders
+WHERE YEAR(OrderDate) = 1996 AND MONTH(OrderDate) = 7
 
 
 
