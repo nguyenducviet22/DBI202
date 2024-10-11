@@ -1,4 +1,7 @@
-SELECT TOP 1 j.JobID, j.JobTitle, COUNT(e.JobID) AS NumberOfEmployees
+SELECT j.JobID, j.JobTitle, COUNT(e.EmployeeID) AS NumberOfEmployees
 FROM Jobs j JOIN Employees e ON j.JobID = e.JobID
 GROUP BY j.JobID, j.JobTitle
-ORDER BY NumberOfEmployees DESC
+HAVING COUNT(e.JobID) >= ALL(SELECT COUNT(e.EmployeeID)
+							FROM Jobs j JOIN Employees e ON j.JobID = e.JobID
+							GROUP BY j.JobID, j.JobTitle)
+--not jobID check again
